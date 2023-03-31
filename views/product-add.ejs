@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var addproduct = function(){
+        var name = $("#name").val();
+        var brand = $("#brand").val();
+        var category = $("#category").val();
+        var rating = $("#rating").val();
+        var price = $("#price").val();
+        var orderdate = $("#orderdate").val();
+        var data = {name,brand,category,rating,price,orderdate};
+        fetch('/api/product'
+        ,{
+          method: 'POST',
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           },
+          body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(function(response){
+          if(response.result == "success"){
+            location = "/product";
+          }
+      });
+      }
+    </script>
+    <h1><%= title %></h1>
+    <input id="name" type="" placeholder="Name" name=""> <br/><br/>
+    <input id="brand" type="" placeholder="Brand" name=""> <br/><br/>
+    <input id="category" type="" placeholder="Category" name=""> <br/><br/>
+    <input id="rating" type="" placeholder="Rating" name=""> <br/><br/>
+    <input id="price" type="" placeholder="Price" name=""> <br/><br/>
+    <input id="orderdate" type="" placeholder="OrderDate" name=""> <br/><br/>
+    <input type="button" name="" onclick="addproduct()" value="Add">
+  </body>
+</html>
